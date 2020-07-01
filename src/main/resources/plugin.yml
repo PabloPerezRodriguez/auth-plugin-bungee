@@ -1,0 +1,5 @@
+name: AuthPlugin
+version: ${project.version}
+main: to.pabli.auth.authplugin.AuthPlugin
+
+author: Pablo Pérez Rodríguez
