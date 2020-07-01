@@ -29,7 +29,8 @@ public final class AuthPlugin extends Plugin {
 
     if (!this.usersFile.exists()) {
       //File does not exist, save to file
-      getLogger().info("Couldn't load 'users.json' database, creating an empty one.");
+      getLogger().warning("Couldn't load 'users.json' database, creating an empty one. Ignore this if it's the " +
+              "first time you run this plugin.");
       this.authDBInstance = new AuthDB();
       try {
         ConfigLoader.saveConfig(this.authDBInstance, this.usersFile);
