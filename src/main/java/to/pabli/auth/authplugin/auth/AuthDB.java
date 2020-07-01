@@ -1,8 +1,11 @@
 package to.pabli.auth.authplugin.auth;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class AuthDB {
+  @SerializedName("userList")
   private ArrayList<AuthUser> userList;
 
   public AuthDB() {

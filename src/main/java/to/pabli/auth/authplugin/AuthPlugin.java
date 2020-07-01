@@ -27,13 +27,24 @@ public final class AuthPlugin extends Plugin {
     // Plugin startup logic
     this.usersFile = new File(this.getDataFolder().getPath() + File.separator + FILENAME);
 
-    try {
-      this.authDBInstance = ConfigLoader.loadConfig(AuthDB.class, usersFile);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    if (this.authDBInstance == null) {
+    if (!this.usersFile.exists()) {
+      //File does not exist, save to file
+      getLogger().info("Couldn't load 'users.json' database, creating an empty one.");
       this.authDBInstance = new AuthDB();
+      try {
+        ConfigLoader.saveConfig(this.authDBInstance, this.usersFile);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      try {
+        this.authDBInstance = ConfigLoader.loadConfig(AuthDB.class, usersFile);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      if (this.authDBInstance == null) {
+        this.authDBInstance = new AuthDB();
+      }
     }
 
     getProxy().getPluginManager().registerCommand(this, new RegisterCommand());

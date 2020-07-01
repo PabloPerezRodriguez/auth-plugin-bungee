@@ -55,16 +55,7 @@ public class ConfigLoader {
    * @throws IOException
    */
   public static <T> T loadConfig(Class<T> clazz, File file) throws IOException {
-    if (file.createNewFile()) { //File does not exist, save to file
-      String json = gson.toJson(parser.parse(gson.toJson(clazz)));
-      try (PrintWriter out = new PrintWriter(file)) {
-        out.println(json);
-      }
-    } else { //File exists, load from file
-      return gson.fromJson(new String(Files.readAllBytes(file.toPath())), clazz);
-    }
-
-    return null;
+    return gson.fromJson(new String(Files.readAllBytes(file.toPath())), clazz);
   }
 
   /**
